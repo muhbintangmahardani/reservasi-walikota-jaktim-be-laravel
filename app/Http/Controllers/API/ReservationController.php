@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Room;
-use App\Models\Notification; // Model Notification sudah di-load
+use App\Models\Notification; 
 use Illuminate\Support\Facades\Schema;
 
 class ReservationController extends Controller
@@ -17,7 +17,8 @@ class ReservationController extends Controller
     
     public function index()
     {
-        $reservations = Reservation::with(['user:id,name,unit_name', 'room:id,room_name'])
+        // 🛠️ DIPERBAIKI: Menghapus batasan kolom agar aman dari error 500
+        $reservations = Reservation::with(['user', 'room'])
             ->orderBy('start_time', 'asc')
             ->get();
         return response()->json($reservations);
@@ -35,7 +36,8 @@ class ReservationController extends Controller
 
     public function getPending()
     {
-        $reservations = Reservation::with(['user:id,name,unit_name', 'room:id,room_name'])
+        // 🛠️ DIPERBAIKI: Menghapus batasan kolom agar aman dari error 500
+        $reservations = Reservation::with(['user', 'room'])
             ->where('status', 'pending')
             ->orderBy('start_time', 'asc')
             ->get();
@@ -44,7 +46,8 @@ class ReservationController extends Controller
 
     public function getActive()
     {
-        $reservations = Reservation::with(['user:id,name,unit_name', 'room:id,room_name'])
+        // 🛠️ DIPERBAIKI: Menghapus batasan kolom agar aman dari error 500
+        $reservations = Reservation::with(['user', 'room'])
             ->where('status', 'verified')
             ->orderBy('start_time', 'asc')
             ->get();
@@ -84,7 +87,7 @@ class ReservationController extends Controller
                 ->whereIn('status', ['pending', 'verified']) 
                 ->where(function ($query) use ($request) {
                     $query->where('start_time', '<', $request->end_time)
-                          ->where('end_time', '>', $request->start_time);
+                        ->where('end_time', '>', $request->start_time);
                 })->exists();
 
             if ($isConflict) {
@@ -159,7 +162,6 @@ class ReservationController extends Controller
         }
     }
 
-    // 🚀 INI DIA PERBAIKANNYA: MENAMBAHKAN NOTIFIKASI SAAT PIMPINAN EDIT JADWAL
     public function update(Request $request, $id)
     {
         try {
@@ -167,7 +169,6 @@ class ReservationController extends Controller
             $updateData = $request->except(['user_id']); 
             $reservation->update($updateData);
 
-            // Jika jadwal ini milik User Bagian, kirim notifikasi bahwa jadwalnya diedit!
             if ($reservation->user_id) {
                 Notification::create([
                     'user_id' => $reservation->user_id,
@@ -193,8 +194,9 @@ class ReservationController extends Controller
 
     public function myHistory(Request $request)
     {
+        // 🛠️ DIPERBAIKI: Menghapus batasan kolom room:id,room_name menjadi room saja
         $reservations = Reservation::where('user_id', $request->user()->id)
-            ->with(['room:id,room_name'])
+            ->with(['room'])
             ->orderBy('start_time', 'desc')
             ->get();
 
