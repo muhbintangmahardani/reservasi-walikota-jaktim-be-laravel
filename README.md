@@ -31,10 +31,8 @@ Ini adalah repositori *Backend* untuk **Sistem Informasi Smart Room Kominfotik J
 
 2. **Konfigurasi Environment**
    Salin file `.env.example` menjadi `.env` lalu sesuaikan konfigurasi database Anda.
-   \`\`\`bash
-   cp .env.example .env
-   php artisan key:generate
-   \`\`\`
+    cp .env.example .env
+    php artisan key:generate
    
    *Contoh isi .env:*
    \`\`\`env
