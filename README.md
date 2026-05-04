@@ -26,9 +26,9 @@ Ini adalah repositori *Backend* untuk **Sistem Informasi Smart Room Kominfotik J
 
 1. **Install Dependensi PHP**
    Jalankan perintah ini di dalam folder `backend`:
-   \`\`\`bash
+   ```bash
    composer install
-   \`\`\`
+   ```
 
 2. **Konfigurasi Environment**
    Salin file `.env.example` menjadi `.env` lalu sesuaikan konfigurasi database Anda.
