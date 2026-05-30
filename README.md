@@ -5,7 +5,7 @@
 ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 ![Sanctum](https://img.shields.io/badge/Sanctum-Security-green?style=for-the-badge)
 
-Ini adalah repositori *Backend* untuk **Sistem Informasi Smart Room Kominfotik Jakarta Timur**. API ini bertugas sebagai sistem saraf pusat yang menangani logika bisnis, autentikasi berlapis, validasi jadwal, dan menjaga keamanan data menggunakan arsitektur RESTful API.
+Ini adalah repositori *Backend* untuk **Sistem Informasi Smart Room Kominfotik Jakarta Timur**. API ini bertugas sebagai sistem pusat yang menangani logika bisnis, autentikasi berlapis, validasi jadwal, dan menjaga keamanan data menggunakan arsitektur RESTful API.
 
 ## 🚀 Fitur Utama Backend
 
@@ -15,29 +15,31 @@ Ini adalah repositori *Backend* untuk **Sistem Informasi Smart Room Kominfotik J
 *   **Strict Rate Limiting**: Perlindungan ketat dari serangan *Brute Force* menggunakan *throttle* bawaan Laravel pada semua *endpoint* autentikasi.
 
 ## 🛠️ Tech Stack
-*   **Framework**: Laravel 11
+*   **Framework**: Laravel 13
 *   **Authentication**: Laravel Sanctum (Token-based)
-*   **Database**: MySQL / MariaDB
+*   **Database**: MySQL
+*   **Tools**: Laragon, Postman
 
 ## 🔧 Panduan Instalasi (Localhost)
 
-**Prasyarat**: PHP >= 8.2, Composer, dan MySQL Server berjalan.
+**Prasyarat**: PHP >= 8.3, Composer, dan MySQL Server berjalan.
 
 1. **Install Dependensi PHP**
    Jalankan perintah ini di dalam folder `backend`:
-   \`\`\`bash
+   ```bash
    composer install
-   \`\`\`
+   ```
 
 2. **Konfigurasi Environment**
    Salin file `.env.example` menjadi `.env` lalu sesuaikan konfigurasi database Anda.
-   \`\`\`bash
-   cp .env.example .env
-   php artisan key:generate
-   \`\`\`
-   
+   ```bash
+    cp .env.example .env
+    php artisan key:generate
+   ```
+
    *Contoh isi .env:*
-   \`\`\`env
+   ```bash
+   env
    APP_NAME="Smart Room API"
    APP_ENV=local
    APP_DEBUG=true
@@ -51,22 +53,21 @@ Ini adalah repositori *Backend* untuk **Sistem Informasi Smart Room Kominfotik J
    DB_PASSWORD=
    
    FRONTEND_URL=http://localhost:3000
-   \`\`\`
+   ```
 
-3. **Migrasi Database & Seeder**
+4. **Migrasi Database & Seeder**
    *(Seeder akan membuatkan tabel beserta akun Admin dan role default)*
-   \`\`\`bash
+   ```bash
    php artisan migrate --seed
-   \`\`\`
+   ```
 
-4. **Jalankan Server Lokal**
-   \`\`\`bash
+5. **Jalankan Server Lokal**
+   ```bash
    php artisan serve
-   \`\`\`
+   ```
    *API akan berjalan di `http://localhost:8000`*
 
-## 📝 Panduan Commit Log
-Jika Anda berkontribusi pada repositori ini, gunakan format *commit* berikut:
+## 📝 Beberapa Penambahan Commit
 *   `feat(api):` Penambahan *endpoint* atau fitur logika baru.
 *   `security(api):` Penambalan celah keamanan atau optimasi validasi.
 *   `fix(api):` Perbaikan *bug* atau *error* pada *controller/model*.
