@@ -6,20 +6,19 @@ return [
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
     |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    // Izinkan semua rute API dan rute web
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '*'],
 
+    // Izinkan semua metode (GET, POST, PUT, DELETE, OPTIONS)
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    // 🔥 TULIS SPESIFIK DOMAIN VERCEL & LOCALHOST (JANGAN PAKAI BINTANG *) 🔥
+    'allowed_origins' => [
+        'https://reservasikominfotikjaktim.vercel.app',
+        'http://localhost:3000',
+    ],
 
     'allowed_origins_patterns' => [],
 
@@ -29,6 +28,7 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    // 🔥 INI WAJIB TRUE KARENA AXIOS ANDA MENGIRIMKAN COOKIE/TOKEN 🔥
+    'supports_credentials' => true,
 
 ];
