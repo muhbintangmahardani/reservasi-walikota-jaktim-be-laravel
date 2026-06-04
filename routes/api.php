@@ -8,9 +8,14 @@ use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ReportController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\PasswordResetController;
 
 // Rute Publik (Bisa diakses tanpa token)
 Route::post('/login', [AuthController::class, 'login']);
+
+// Rute Reset Password
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail']);
+Route::post('/reset-password', [PasswordResetController::class, 'reset']);
 
 Route::post('/request-reset-password', [AuthController::class, 'requestPasswordReset']);
 Route::delete('/notifications/{id}', function($id) {
@@ -62,4 +67,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Rute Notifikasi
     Route::get('/notifications', [NotificationController::class, 'index']);
     Route::post('/notifications/mark-read', [NotificationController::class, 'markAsRead']);
+
+    
 });
