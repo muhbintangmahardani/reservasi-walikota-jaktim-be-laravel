@@ -7,7 +7,7 @@ use App\Http\Controllers\API\ReservationController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ReportController;
-use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\PasswordResetController;
 
 // Rute Publik (Bisa diakses tanpa token)
